@@ -11,6 +11,10 @@ func main() {
 
 	models.Connect()
 
-	r.GET("books/", controllers.GetBooks)
+	r.GET("book/", controllers.GetBooks)
+	r.GET("book/:id", controllers.GetBook)
+	r.POST("book/", controllers.CreateBook)
+	r.PUT("book/:id", controllers.UpdateBook)
+	r.DELETE("book/:id", controllers.DeleteBook)
 	r.Run()
 }
