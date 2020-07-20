@@ -16,5 +16,10 @@ func main() {
 	r.POST("book/", controllers.CreateBook)
 	r.PUT("book/:id", controllers.UpdateBook)
 	r.DELETE("book/:id", controllers.DeleteBook)
+
+	r.GET("author/", controllers.GetAuthors)
+	r.POST("author/", controllers.CreateAuthor)
+	r.PUT("author/:id", controllers.UpdateAuthor)
+	r.DELETE("author/:id", controllers.DeleteAuthor)
 	r.Run()
 }
