@@ -16,7 +16,7 @@ func main() {
 	// fmt.Println("hello", name)
 
 	models.Connect()
-	
+
 	book := r.Group("/book")
 	{
 		book.GET("/", controllers.GetBooks)
@@ -32,6 +32,14 @@ func main() {
 		author.POST("/", controllers.CreateAuthor)
 		author.PUT("/:id", controllers.UpdateAuthor)
 		author.DELETE("/:id", controllers.DeleteAuthor)
+	}
+
+	genre := r.Group("/genre")
+	{
+		genre.GET("/", controllers.GetGenres)
+		genre.POST("/", controllers.CreateGenre)
+		genre.PUT("/:id", controllers.UpdateGenre)
+		genre.DELETE("/:id", controllers.DeleteGenre)
 	}
 
 	r.Run()
