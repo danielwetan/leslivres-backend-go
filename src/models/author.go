@@ -5,10 +5,6 @@ type Author struct {
 	Name string `json:"name"`
 }
 
-type CreateAuthorInput struct {
-	Name string `json:"name"`
-}
-
-type UpdateAuthorInput struct {
+type AuthorInput struct {
 	Name string `json:"name"`
 }

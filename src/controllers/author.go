@@ -16,7 +16,7 @@ func GetAuthors(c *gin.Context) {
 }
 
 func CreateAuthor(c *gin.Context) {
-	var input models.CreateAuthorInput
+	var input models.AuthorInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 	}
@@ -34,7 +34,7 @@ func UpdateAuthor(c *gin.Context) {
 		return
 	}
 
-	var input models.UpdateAuthorInput
+	var input models.AuthorInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Data not found"})
 		return
