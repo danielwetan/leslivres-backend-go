@@ -3,11 +3,17 @@ package main
 import (
 	"github.com/danielwetan/leslivres-backend-go/src/controllers"
 	"github.com/danielwetan/leslivres-backend-go/src/models"
+	"github.com/joho/godotenv"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	r := gin.Default()
+
+	// dotenv
+	godotenv.Load()
+	// name := os.Getenv("APP_NAME")
+	// fmt.Println("hello", name)
 
 	models.Connect()
 
