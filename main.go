@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/danielwetan/leslivres-backend-go/controllers"
-	"github.com/danielwetan/leslivres-backend-go/models"
+	"github.com/danielwetan/leslivres-backend-go/src/controllers"
+	"github.com/danielwetan/leslivres-backend-go/src/models"
 	"github.com/gin-gonic/gin"
 )
 
