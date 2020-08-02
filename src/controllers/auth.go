@@ -20,13 +20,13 @@ func Register(c *gin.Context) {
 }
 
 func Login(c *gin.Context) {
-	var input models.Login
+	var input models.Users
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 	}
 
-	login := models.Login{Username: input.Username, Password: input.Password}
-	models.DB.Where("username = ?", "daniel").Find(&input)
+	login := models.Users{Username: input.Username, Password: input.Password}
+	models.DB.Where("username = ?", login).Find(&input)
 
-	c.JSON(http.StatusOK, gin.H{"data": login})
+	c.JSON(http.StatusOK, gin.H{"data": input})
 }

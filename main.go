@@ -52,5 +52,10 @@ func main() {
 		auth.POST("/login", controllers.Login)
 	}
 
+	user := r.Group("/user")
+	{
+		user.GET("/:id", controllers.GetUserData)
+	}
+
 	r.Run(PORT)
 }
