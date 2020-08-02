@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	// "log"
 	"net/http"
 
 	"github.com/danielwetan/leslivres-backend-go/src/models"
@@ -23,5 +22,6 @@ func GetUserData(c *gin.Context) {
 	// email := "email:" + data.Email
 
 	// msg := []string {username, fullName , email}
+	data.Password = "SECRET" // bug: delete password from result data
 	c.JSON(http.StatusOK, gin.H{"data": data})
 }
