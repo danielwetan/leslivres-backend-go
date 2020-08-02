@@ -57,5 +57,13 @@ func main() {
 		user.GET("/:id", controllers.GetUserData)
 	}
 
+	transaction := r.Group("/transaction")
+	{
+		transaction.GET("/:id", controllers.GetTranscation)
+		transaction.POST("/", controllers.CreateTransaction)
+		transaction.PUT("/:id", controllers.UpdateTransaction)
+		transaction.DELETE("/:id", controllers.DeleteTransaction)
+	}
+	
 	r.Run(PORT)
 }
