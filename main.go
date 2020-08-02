@@ -5,15 +5,19 @@ import (
 	"github.com/danielwetan/leslivres-backend-go/src/models"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	"os"
 	// "github.com/danielwetan/leslivres-backend-go/src/routes"
+	"github.com/gin-contrib/cors"
 )
 
 func main() {
 	r := gin.Default()
+
+	// Cors
+	r.Use(cors.Default())
 	// dotenv
 	godotenv.Load()
-	// name := os.Getenv("APP_NAME")
-	// fmt.Println("hello", name)
+	PORT := os.Getenv("PORT")
 
 	models.Connect()
 
@@ -42,5 +46,11 @@ func main() {
 		genre.DELETE("/:id", controllers.DeleteGenre)
 	}
 
-	r.Run()
+	auth := r.Group("/auth")
+	{
+		auth.POST("/register", controllers.Register)
+		auth.POST("/login", controllers.Login)
+	}
+
+	r.Run(PORT)
 }
