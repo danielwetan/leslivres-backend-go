@@ -10,7 +10,10 @@ import (
 // Get all books
 func GetBooks(c *gin.Context) {
 	var books []models.Book
-	models.DB.Find(&books)
+	// models.DB.Find(&books)
+	// models.DB.Joins("INNER JOIN authors ON books.author = authors.id").Find(&books)
+	// models.DB.Table("books").Select("books.id as id, books.title as title, books.description as description, books.img as img, authors.name as author").Joins("INNER JOIN authors ON books.author = authors.id").Scan(&books)
+	models.DB.Table("books").Select("books.id as id, books.title as title, books.description as description, books.img as img, authors.name as author, genres.name as genre, books.status as status, books.date_added as added, books.date_updated as updated").Joins("INNER JOIN authors ON books.author = authors.id INNER JOIN genres ON books.genre = genres.id").Limit(12).Scan(&books)
 
 	c.JSON(http.StatusOK, gin.H{"data": books})
 }
