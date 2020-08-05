@@ -4,6 +4,7 @@ import (
 	"github.com/danielwetan/leslivres-backend-go/src/controllers"
 	"github.com/danielwetan/leslivres-backend-go/src/models"
 	"github.com/gin-gonic/gin"
+	// "github.com/gin-gonic/contrib/static"
 	"github.com/joho/godotenv"
 	"os"
 	// "github.com/danielwetan/leslivres-backend-go/src/routes"
@@ -12,6 +13,9 @@ import (
 
 func main() {
 	r := gin.Default()
+
+	// Serve static files
+	r.Static("/img", "./src/assets")
 
 	// Cors
 	r.Use(cors.Default())
@@ -64,6 +68,6 @@ func main() {
 		transaction.PUT("/:id", controllers.UpdateTransaction)
 		transaction.DELETE("/:id", controllers.DeleteTransaction)
 	}
-	
+
 	r.Run(PORT)
 }

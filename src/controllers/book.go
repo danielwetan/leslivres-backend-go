@@ -14,7 +14,6 @@ func GetBooks(c *gin.Context) {
 	// models.DB.Joins("INNER JOIN authors ON books.author = authors.id").Find(&books)
 	// models.DB.Table("books").Select("books.id as id, books.title as title, books.description as description, books.img as img, authors.name as author").Joins("INNER JOIN authors ON books.author = authors.id").Scan(&books)
 	models.DB.Table("books").Select("books.id as id, books.title as title, books.description as description, books.img as img, authors.name as author, genres.name as genre, books.status as status, books.date_added as added, books.date_updated as updated").Joins("INNER JOIN authors ON books.author = authors.id INNER JOIN genres ON books.genre = genres.id").Limit(12).Scan(&books)
-
 	c.JSON(http.StatusOK, gin.H{"data": books})
 }
 
@@ -22,7 +21,9 @@ func GetBooks(c *gin.Context) {
 func GetBook(c *gin.Context) {
 	var book models.Book
 
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&book).Error; err != nil {
+
+	// if err := models.DB.Where("id = ?", c.Param("id")).First(&book).Error; err != nil {
+	if err := models.DB.Table("books").Select("books.id as id, books.title as title, books.description as description, books.img as img, authors.name as author, genres.name as genre, books.status as status, books.date_added as added, books.date_updated as updated").Joins("INNER JOIN authors ON books.author = authors.id INNER JOIN genres ON books.genre = genres.id").Where("books.id= ?", c.Param("id")).Find(&book).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Data not found"})
 		return
 	}

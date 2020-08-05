@@ -11,7 +11,7 @@ import (
 func GetTranscation(c *gin.Context) {
 	var transaction models.Transaction
 
-	if err := models.DB.Where("id=?", c.Param("id")).First(&transaction).Error; err != nil {
+	if err := models.DB.Where("id=?", c.Param("id")).Find(&transaction).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Data not found"})
 		return
 	}
@@ -20,7 +20,7 @@ func GetTranscation(c *gin.Context) {
 }
 
 // Create new transaction
-func CreateTransaction(c *gin.Context) { 
+func CreateTransaction(c *gin.Context) {
 	var input models.CreateTransactioniInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
